@@ -89,7 +89,15 @@ npm start
 - **ClientID**: Found in "OAuth2" → "Client ID"
 - **GuildID**: Enable Developer Mode in Discord → Right-click server → Copy Server ID
 
-### Spotify API
+### YouTube API Key (Required)
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com)
+2. Create a new project
+3. Enable "YouTube Data API v3"
+4. Create API key
+5. Add to `.env` as `YOUTUBE_API_KEY`
+
+### Spotify API (Optional)
 
 1. Go to [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)
 2. Create an application
@@ -100,14 +108,6 @@ npm start
    SPOTIFY_CLIENT_ID=your_id
    SPOTIFY_CLIENT_SECRET=your_secret
    ```
-
-### YouTube API Key (Optional)
-
-1. Go to [Google Cloud Console](https://console.cloud.google.com)
-2. Create a new project
-3. Enable "YouTube Data API v3"
-4. Create API key
-5. Add to `.env` as `YOUTUBE_API_KEY`
 
 If not provided, the bot uses `yt-dlp` for searching automatically.
 

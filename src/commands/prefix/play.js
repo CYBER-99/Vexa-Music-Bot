@@ -15,11 +15,6 @@ import {
 import SpotifyWebApi from 'spotify-web-api-node';
 import config from '../../config/config.js';
 
-const spotifyApi = new SpotifyWebApi({
-  clientId: config.spotify.clientId,
-  clientSecret: config.spotify.clientSecret
-});
-
 export default {
   name: 'play',
   async execute(message, args, playerManager, client) {
@@ -29,6 +24,15 @@ export default {
     if (!query) {
       const errorEmbed = createErrorEmbed('Please provide a song name or URL');
       return await message.reply({ embeds: [errorEmbed] });
+    }
+
+    // Initialize Spotify client if enabled
+    let spotifyApi = null;
+    if (config.spotify.enabled) {
+      spotifyApi = new SpotifyWebApi({
+        clientId: config.spotify.clientId,
+        clientSecret: config.spotify.clientSecret
+      });
     }
 
     // Join voice channel
@@ -54,6 +58,10 @@ export default {
 
       // Handle Spotify track
       if (isSpotifyUrl(query) && query.includes('/track/')) {
+        if (!config.spotify.enabled) {
+          const errorEmbed = createErrorEmbed('Spotify support is currently disabled. Use a YouTube link or search instead.');
+          return await reply.edit({ embeds: [errorEmbed] });
+        }
         await spotifyApi.clientCredentialsFlow().then(data => {
           spotifyApi.setAccessToken(data.body.access_token);
         });
@@ -61,6 +69,10 @@ export default {
       }
       // Handle Spotify playlist
       else if (isSpotifyUrl(query) && query.includes('/playlist/')) {
+        if (!config.spotify.enabled) {
+          const errorEmbed = createErrorEmbed('Spotify support is currently disabled. Use a YouTube link or search instead.');
+          return await reply.edit({ embeds: [errorEmbed] });
+        }
         await spotifyApi.clientCredentialsFlow().then(data => {
           spotifyApi.setAccessToken(data.body.access_token);
         });

@@ -6,8 +6,6 @@ const requiredVars = [
   'DISCORD_TOKEN',
   'CLIENT_ID',
   'GUILD_ID',
-  'SPOTIFY_CLIENT_ID',
-  'SPOTIFY_CLIENT_SECRET',
   'YOUTUBE_API_KEY'
 ];
 
@@ -21,7 +19,16 @@ if (missingVars.length > 0) {
 }
 
 console.log('Environment loaded');
-console.log('All required variables detected');
+console.log('Discord token detected');
+console.log('YouTube API ready');
+
+// Check for optional Spotify
+const spotifyEnabled = process.env.SPOTIFY_CLIENT_ID && process.env.SPOTIFY_CLIENT_SECRET;
+if (spotifyEnabled) {
+  console.log('Spotify enabled');
+} else {
+  console.log('Spotify disabled');
+}
 
 const config = {
   discord: {
@@ -30,8 +37,9 @@ const config = {
     guildId: process.env.GUILD_ID
   },
   spotify: {
-    clientId: process.env.SPOTIFY_CLIENT_ID,
-    clientSecret: process.env.SPOTIFY_CLIENT_SECRET
+    enabled: spotifyEnabled,
+    clientId: process.env.SPOTIFY_CLIENT_ID || null,
+    clientSecret: process.env.SPOTIFY_CLIENT_SECRET || null
   },
   youtube: {
     apiKey: process.env.YOUTUBE_API_KEY

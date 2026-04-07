@@ -23,11 +23,14 @@ const client = new Client({
   ]
 });
 
-// Initialize Spotify API
-const spotifyApi = new SpotifyWebApi({
-  clientId: config.spotify.clientId,
-  clientSecret: config.spotify.clientSecret
-});
+// Initialize Spotify API if enabled
+let spotifyApi = null;
+if (config.spotify.enabled) {
+  spotifyApi = new SpotifyWebApi({
+    clientId: config.spotify.clientId,
+    clientSecret: config.spotify.clientSecret
+  });
+}
 
 // Initialize command collections
 client.slashCommands = new Collection();
@@ -43,8 +46,6 @@ async function startup() {
   console.log('🔗 API Validation:');
   await validateAPIs(config.youtube.apiKey, spotifyApi);
 
-  console.log('Spotify API ready');
-  console.log('YouTube API ready');
   console.log('Audio system ready');
   console.log('Bot starting');
 

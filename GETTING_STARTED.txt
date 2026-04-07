@@ -115,12 +115,12 @@ From Discord:
    • CLIENT_ID
    • GUILD_ID
 
-From Spotify:
+From Google (Required):
+   • YOUTUBE_API_KEY
+
+From Spotify (Optional):
    • SPOTIFY_CLIENT_ID
    • SPOTIFY_CLIENT_SECRET
-
-From Google (Optional):
-   • YOUTUBE_API_KEY (for better searching)
 
 ═══════════════════════════════════════════════════
 

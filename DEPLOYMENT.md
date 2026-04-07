@@ -36,9 +36,9 @@ Railway is recommended for beginners.
   DISCORD_TOKEN=your_token
   CLIENT_ID=your_id
   GUILD_ID=your_guild
-  SPOTIFY_CLIENT_ID=your_spotify_id
-  SPOTIFY_CLIENT_SECRET=your_spotify_secret
-  YOUTUBE_API_KEY=your_youtube_key (optional)
+  YOUTUBE_API_KEY=your_youtube_key
+  SPOTIFY_CLIENT_ID=your_spotify_id (optional)
+  SPOTIFY_CLIENT_SECRET=your_spotify_secret (optional)
   NODE_ENV=production
   ```
 
@@ -199,6 +199,7 @@ docker run -d \
   -e DISCORD_TOKEN=your_token \
   -e CLIENT_ID=your_id \
   -e GUILD_ID=your_guild \
+  -e YOUTUBE_API_KEY=your_youtube_key \
   -e SPOTIFY_CLIENT_ID=your_spotify_id \
   -e SPOTIFY_CLIENT_SECRET=your_spotify_secret \
   --name vexa-bot \

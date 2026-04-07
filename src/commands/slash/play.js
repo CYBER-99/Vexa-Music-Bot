@@ -31,11 +31,14 @@ export default {
     const player = playerManager.getPlayer(interaction.guildId, client);
     const query = interaction.options.getString('song');
 
-    // Initialize Spotify client
-    const spotifyApi = new SpotifyWebApi({
-      clientId: config.spotify.clientId,
-      clientSecret: config.spotify.clientSecret
-    });
+    // Initialize Spotify client if enabled
+    let spotifyApi = null;
+    if (config.spotify.enabled) {
+      spotifyApi = new SpotifyWebApi({
+        clientId: config.spotify.clientId,
+        clientSecret: config.spotify.clientSecret
+      });
+    }
 
     // Join voice channel
     if (!player.voiceConnection) {
@@ -57,6 +60,10 @@ export default {
 
       // Handle Spotify track
       if (isSpotifyUrl(query) && query.includes('/track/')) {
+        if (!config.spotify.enabled) {
+          const errorEmbed = createErrorEmbed('Spotify support is currently disabled. Use a YouTube link or search instead.');
+          return await interaction.editReply({ embeds: [errorEmbed] });
+        }
         try {
           const data = await spotifyApi.clientCredentialsFlow();
           spotifyApi.setAccessToken(data.body.access_token);
@@ -67,6 +74,10 @@ export default {
       }
       // Handle Spotify playlist
       else if (isSpotifyUrl(query) && query.includes('/playlist/')) {
+        if (!config.spotify.enabled) {
+          const errorEmbed = createErrorEmbed('Spotify support is currently disabled. Use a YouTube link or search instead.');
+          return await interaction.editReply({ embeds: [errorEmbed] });
+        }
         try {
           const data = await spotifyApi.clientCredentialsFlow();
           spotifyApi.setAccessToken(data.body.access_token);

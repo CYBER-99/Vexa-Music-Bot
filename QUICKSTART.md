@@ -32,7 +32,7 @@ This will install all required packages.
 - **Client ID**: In your application, go to **OAuth2** and copy your **Client ID**
 - **Guild ID**: In Discord, enable **Developer Mode** → right-click your server → **Copy Server ID**
 
-### Spotify API (Required)
+### Spotify API (Optional)
 1. Go to [Spotify Developer Dashboard](https://developer.spotify.com/dashboard)
 2. Create a new application
 3. Accept terms, create app
@@ -40,7 +40,7 @@ This will install all required packages.
    - **Client ID**
    - **Client Secret**
 
-### YouTube API (Optional but Recommended)
+### YouTube API (Required)
 1. Go to [Google Cloud Console](https://console.cloud.google.com)
 2. Create a new project
 3. Enable **"YouTube Data API v3"**

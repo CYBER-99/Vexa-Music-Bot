@@ -6,16 +6,16 @@ export async function validateAPIs(youtubeApiKey, spotifyClient) {
   }
   console.log('✅ YouTube API key provided');
 
-  if (!spotifyClient) {
-    throw new Error('Spotify client is not initialized');
-  }
-
-  try {
-    const data = await spotifyClient.clientCredentialsFlow();
-    spotifyClient.setAccessToken(data.body.access_token);
-    console.log('✅ Spotify API connection successful');
-  } catch (error) {
-    console.error('❌ Spotify API connection failed:', error?.message || error);
-    throw new Error('Spotify API initialization failed');
+  if (spotifyClient) {
+    try {
+      const data = await spotifyClient.clientCredentialsFlow();
+      spotifyClient.setAccessToken(data.body.access_token);
+      console.log('✅ Spotify API connection successful');
+    } catch (error) {
+      console.error('❌ Spotify API connection failed:', error?.message || error);
+      throw new Error('Spotify API initialization failed');
+    }
+  } else {
+    console.log('ℹ️ Spotify API not configured - Spotify features disabled');
   }
 }
