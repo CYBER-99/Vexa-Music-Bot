@@ -2,11 +2,11 @@
   "name": "vexa-music-bot",
   "version": "1.0.0",
   "description": "A production-ready Discord music bot with YouTube and Spotify support",
-  "main": "index.js",
+  "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "dev": "node --watch index.js",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
     "validate": "node validate.js"
   },
   "keywords": [
@@ -28,7 +28,10 @@
     "spotify-web-api-node": "^5.0.2",
     "dotenv": "^16.4.1"
   },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
   "engines": {
-    "node": ">=20.0.0"
+    "node": "20.x"
   }
 }
