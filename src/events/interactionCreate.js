@@ -10,15 +10,25 @@ import playerManager from '../music/playerManager.js';
 export default {
   name: 'interactionCreate',
   async execute(interaction, client) {
+    console.log("Interaction received:", interaction.type, interaction.isChatInputCommand() ? interaction.commandName : interaction.customId);
+
     // Handle slash commands
     if (interaction.isChatInputCommand()) {
       const command = client.slashCommands.get(interaction.commandName);
 
-      if (!command) return;
+      if (!command) {
+        console.log("Command not found:", interaction.commandName);
+        return;
+      }
+
+      console.log("Slash command detected:", interaction.commandName);
 
       try {
+        console.log("Executing slash command:", interaction.commandName);
         await command.execute(interaction, playerManager, client);
+        console.log("Slash command completed:", interaction.commandName);
       } catch (error) {
+        console.error("Slash command failed:", error);
         console.error(`❌ Error executing slash command ${interaction.commandName}:`, error);
         const errorEmbed = createErrorEmbed(error.message || 'An error occurred');
         
@@ -35,7 +45,10 @@ export default {
       const player = playerManager.getPlayer(interaction.guildId, client);
       const customId = interaction.customId;
 
+      console.log("Button interaction detected:", customId);
+
       try {
+        console.log("Executing button action:", customId);
         await interaction.deferUpdate();
 
         switch (customId) {
@@ -107,6 +120,7 @@ export default {
             break;
         }
       } catch (error) {
+        console.error("Button interaction failed:", error);
         console.error('❌ Button interaction error:', error);
       }
     }

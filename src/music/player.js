@@ -13,6 +13,7 @@ export class GuildPlayer {
     this.guildId = guildId;
     this.client = client;
     this.audioPlayer = createAudioPlayer();
+    console.log("Creating audio player for guild:", guildId);
     this.voiceConnection = null;
     this.queue = [];
     this.currentTrack = null;
@@ -62,6 +63,7 @@ export class GuildPlayer {
 
   async joinVoiceChannel(channel) {
     try {
+      console.log("Joining voice channel:", channel.name);
       this.voiceConnection = joinVoiceChannel({
         channelId: channel.id,
         guildId: channel.guild.id,
@@ -79,6 +81,7 @@ export class GuildPlayer {
 
   async playTrack(track, sendMessage = true) {
     try {
+      console.log("Starting playback for track:", track.title);
       const stream = await getPlaydlStream(track);
       const resource = createAudioResource(stream, { inlineVolume: true });
       resource.volume?.setVolume(this.volume / 100);

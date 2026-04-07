@@ -40,6 +40,7 @@ async function startup() {
   await validateAPIs(config.youtube.apiKey, spotifyApi);
 
   console.log('Audio system ready');
+  console.log("FFmpeg path:", process.env.FFMPEG_PATH);
   console.log('Bot starting');
 
   // Load commands

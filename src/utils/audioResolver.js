@@ -26,6 +26,7 @@ export async function searchYoutube(query, apiKey = config.youtube.apiKey) {
     // For now, always use fallback since YouTube API requires complex setup
     return searchYoutubeFallback(query);
   } catch (error) {
+    console.error('❌ YouTube search failed:', error);
     console.warn('⚠️ YouTube search failed, using fallback');
     return searchYoutubeFallback(query);
   }

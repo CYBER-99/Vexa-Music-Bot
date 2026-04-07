@@ -69,6 +69,7 @@ export default {
           spotifyApi.setAccessToken(data.body.access_token);
           track = await resolveSpotifyTrack(query, spotifyApi);
         } catch (error) {
+          console.error('❌ Spotify track resolution failed:', error);
           console.warn('⚠️ Spotify track resolution failed');
         }
       }
@@ -101,6 +102,7 @@ export default {
           );
           await interaction.editReply({ embeds: [successEmbed] });
         } catch (error) {
+          console.error('❌ Spotify playlist resolution failed:', error);
           console.warn('⚠️ Spotify playlist resolution failed');
         }
       }
