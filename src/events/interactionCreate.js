@@ -5,7 +5,7 @@ import {
   createPlaybackControlsButtons,
   createVolumeControlButtons
 } from '../ui/embeds.js';
-import { playerManager } from '../../index.js';
+import playerManager from '../music/playerManager.js';
 
 export default {
   name: 'interactionCreate',

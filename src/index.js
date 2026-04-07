@@ -3,14 +3,7 @@ import SpotifyWebApi from 'spotify-web-api-node';
 import config from './config/config.js';
 import { validateAPIs } from './utils/apiValidator.js';
 import { loadSlashCommands, loadPrefixCommands, loadEvents, registerSlashCommands } from './handlers/commandLoader.js';
-import { PlayerManager } from './music/player.js';
-
-console.log(`Node version: ${process.version}`);
-console.log(`Platform: ${process.platform}`);
-console.log(`Environment detected: ${process.env.NODE_ENV || 'development'}`);
-
-// Global player manager
-export const playerManager = new PlayerManager();
+import playerManager from './music/playerManager.js';
 
 // Initialize Discord client
 const client = new Client({

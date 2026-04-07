@@ -1,6 +1,6 @@
 import { createErrorEmbed } from '../ui/embeds.js';
 import config from '../config/config.js';
-import { playerManager } from '../../index.js';
+import playerManager from '../music/playerManager.js';
 
 export default {
   name: 'messageCreate',
