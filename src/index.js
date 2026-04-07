@@ -61,7 +61,7 @@ async function startup() {
   // Register slash commands with Discord
   console.log('\n🔐 Registering with Discord:');
   client.once('ready', async () => {
-    await registerSlashCommands(client, slashCommands.values());
+    await registerSlashCommands(client, slashCommands);
   });
 
   // Login to Discord

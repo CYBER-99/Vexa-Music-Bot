@@ -65,7 +65,12 @@ export async function loadEvents(client) {
 }
 
 export async function registerSlashCommands(client, commands) {
-  const commandData = commands.map(cmd => cmd.data.toJSON());
+  if (!commands || commands.size === 0) {
+    console.log("No commands found to register.");
+    return;
+  }
+
+  const commandData = Array.from(commands.values()).map(cmd => cmd.data.toJSON());
 
   try {
     await client.application.commands.set(commandData);
